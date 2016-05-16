@@ -10,7 +10,9 @@
       })
       .state('app.signup', {
         url:'/signup',
-        templateUrl:'app/pages/auth/_signup.html'
+        templateUrl:'app/pages/auth/_signup.html',
+        controllerAs: "auth",
+        controller: 'AuthCtrl'
       })
 
     }
