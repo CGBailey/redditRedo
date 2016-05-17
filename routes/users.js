@@ -33,7 +33,7 @@ router.post('/signup', valid.register, function(req, res, next) {
         })
       } else {
         res.status(422).json({
-          errors: ["Email has already been taken"]
+          error: "Email has already been taken"
         })
       }
     })

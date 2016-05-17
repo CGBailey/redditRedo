@@ -2,12 +2,14 @@
   angular.module('app.services')
   .service('UserService', UserService);
 
-  function UserService($http, JWT) {
+  function UserService($http, JWT, $window) {
     var self = this;
 
     self.currentUser = null;
-      self.signUpAuth = function(user) {
-        return $http.post('/api/v1/users/signup', {user})
+
+
+      self.attemptAuth = function(authType, user) {
+        return $http.post('/api/v1/users' + authType, {user})
         .then(function(response){
           JWT.save(response.data.token)
           self.currentUser = response.data.id;
@@ -15,23 +17,15 @@
           return response;
         })
         .catch(function(error){
-          console.log(error);
+          console.log(error.data.error);
         })
       };
 
-      self.loginAuth= function(user) {
-        console.log(user);
-        return $http.post('/api/v1/users/login', {user})
-        .then(function(response){
-          console.log("tokenised");
-          JWT.save(response.data.token)
-          self.currentUser = response.data.id;
 
-          return response;
-        })
-        .catch(function(error){
-          console.log(error);
-        })
+      self.logOut = function() {
+        self.currentUser = null;
+        jwt.destroy();
+        $window.location.reload;
       }
   }
 

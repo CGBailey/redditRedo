@@ -3,21 +3,16 @@
   .controller('AuthCtrl', AuthCtrl);
   function AuthCtrl(UserService, $state){
     var vm = this;
+    var authType = $state.current.url;
+    vm.handleAuth = function(){
 
-    vm.handleSignUp = function(){
-
-    return  UserService.signUpAuth(vm.newUser).then(function() {
-      $state.go('app.home')
+    return  UserService.attemptAuth(authType, vm.user)
+    .then(function() {
+      $state.go('app.home', null, { reload: true })
     })
     }
 
-    vm.handleLogin = function(){
-      console.log(vm.login);
-      return UserService.loginAuth(vm.login).then(function() {
-        $state.go('app.home')
-      })
-      vm.user = {};
-    }
+
 
   }
 })()
