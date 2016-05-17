@@ -37,7 +37,38 @@ router.post('/signup', valid.register, function(req, res, next) {
         })
       }
     })
+  });
 
+  router.post('/login', valid.login, function(req, res, next) {
+
+    const user = req.body.user;
+    const email = user.email;
+    const password = user.password;
+    knex('users')
+      .whereRaw('lower(email) = ?', user.email.toLowerCase())
+      .first()
+      .then(function (result) {
+        console.log(result.password_hash)
+        console.log(password);
+        if (!result) {
+          res.status(422).json({
+            error: "Invalid password or email"
+          })
+        }
+        else if(!bcrypt.compareSync(password, result.password_hash)) {
+            res.status(422).send({ error: 'Invalid password or email' });
+        }
+        else {
+          const token = jwt.sign({ id: result.id }, process.env.JWT_SECRET )
+
+          res.json({
+            id: result.id,
+            email: email,
+            username: result.username,
+            token: token
+          })
+        }
+      })
 
 
 });

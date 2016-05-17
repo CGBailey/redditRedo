@@ -6,11 +6,18 @@
 
     vm.handleSignUp = function(){
 
-      UserService.signUpAuth(vm.newUser);
-      vm.newUser = {};
+    return  UserService.signUpAuth(vm.newUser).then(function() {
+      $state.go('app.home')
+    })
     }
 
-
+    vm.handleLogin = function(){
+      console.log(vm.login);
+      return UserService.loginAuth(vm.login).then(function() {
+        $state.go('app.home')
+      })
+      vm.user = {};
+    }
 
   }
 })()

@@ -6,12 +6,14 @@
       $stateProvider
       .state('app.login', {
         url:'/login',
-        templateUrl:'/app/pages/auth/_login.html'
+        templateUrl:'/app/pages/auth/_login.html',
+        controllerAs: 'auth',
+        controller: 'AuthCtrl'
       })
       .state('app.signup', {
         url:'/signup',
         templateUrl:'app/pages/auth/_signup.html',
-        controllerAs: "auth",
+        controllerAs: 'auth',
         controller: 'AuthCtrl'
       })
 
