@@ -4,6 +4,7 @@ var depends = [
   'ui.router',
   'app.home',
   'app.auth',
+  'app.comments',
   'app.services'
 ];
 

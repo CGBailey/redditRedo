@@ -1,6 +1,6 @@
 <p>
   <span class="glyphicon glyphicon-calendar"></span>
-  {{ post.date }} |
+  4.20.2016 |
   <span class="hoverable" ng-click="toggleCommentVisibility(post)">
     <span class="glyphicon glyphicon-comment"></span>
     <ng-pluralize count="post.comments.length" when="{1: '1 comment', 'other': '{{ post.comments.length }} comments'}"></ng-pluralize>
@@ -12,7 +12,7 @@
 </p>
 <div class="comment" ng-show="post.commentsVisible">
   <p ng-repeat="comment in post.comments">
-    <strong>{{ comment.author }}</strong> - {{ comment.text }}
+    <strong>Cooper</strong> - Butt Stuff
   </p>
 </div>
 <div class="comment" ng-show="post.newCommentVisible">
